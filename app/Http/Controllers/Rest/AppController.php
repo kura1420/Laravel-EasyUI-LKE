@@ -22,6 +22,26 @@ class AppController extends Controller
                         'text' => 'Satker',
                         'title' => 'Satker',
                         'url' => 'satker',
+                    ],
+                    [
+                        'id' => uniqid(),
+                        'text' => 'Predikat',
+                        'title' => 'Predikat',
+                        'url' => 'predikat',
+                    ],
+                ],
+            ],
+            [
+                'id' => uniqid(),
+                'text' => 'Lke',
+                'title' => 'Lke',
+                'url' => null,
+                'children' => [
+                    [
+                        'id' => uniqid(),
+                        'text' => 'List',
+                        'title' => 'List',
+                        'url' => 'lke',
                     ]
                 ],
             ],

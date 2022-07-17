@@ -28,5 +28,6 @@ Route::middleware('authApp')->group(function() {
 
     require_once 'erp/pages/_core.php';
     require_once 'erp/pages/_instansi.php';
+    require_once 'erp/pages/_lke.php';
     
 });
