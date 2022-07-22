@@ -18,4 +18,9 @@ class LkeController extends Controller
     {
         return view(self::FOLDER . 'predikat.main');
     }
+
+    public function setting()
+    {
+        return view(self::FOLDER . 'setting.main');
+    }
 }

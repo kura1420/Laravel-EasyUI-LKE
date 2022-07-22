@@ -86,9 +86,8 @@ class LkeController extends Controller
 
     public function lists()
     {
-        $rows = Lke::where('active', 1)
+        $rows = Lke::where('aktif', 1)
             ->orderBy('nama', 'asc')
-            ->select('id', 'nama as text')
             ->get();
 
         return response()->json($rows);

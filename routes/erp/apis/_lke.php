@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Rest\LkeController;
+use App\Http\Controllers\Rest\LkeIndikatorController;
+use App\Http\Controllers\Rest\LkeIndikatorNilaiController;
 use App\Http\Controllers\Rest\PredikatController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +30,29 @@ Route::prefix('lke')->group(function () {
         
         Route::delete('/{id}', 'destroy'); 
         Route::delete('/predikat/{id}', 'predikatDestroy');
+    });
+});
+
+Route::prefix('lke-indikator')->group(function () {
+    Route::controller(LkeIndikatorController::class)->group(function() {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+    
+        Route::post('/', 'store');
+        Route::post('/lists', 'lists');
+        Route::get('/parent/{id}', 'parent');
+        
+        Route::delete('/{id}', 'destroy'); 
+    });
+});
+
+Route::prefix('lke-indikator-nilai')->group(function () {
+    Route::controller(LkeIndikatorNilaiController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+    
+        Route::post('/', 'store');
+        
+        Route::delete('/{id}', 'destroy'); 
     });
 });

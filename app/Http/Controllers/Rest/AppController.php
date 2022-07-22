@@ -42,7 +42,13 @@ class AppController extends Controller
                         'text' => 'List',
                         'title' => 'List',
                         'url' => 'lke',
-                    ]
+                    ],
+                    [
+                        'id' => uniqid(),
+                        'text' => 'Setting',
+                        'title' => 'Setting',
+                        'url' => 'lke-setting',
+                    ],
                 ],
             ],
             [
