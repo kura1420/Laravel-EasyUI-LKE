@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Rest\LkeController;
 use App\Http\Controllers\Rest\LkeIndikatorController;
+use App\Http\Controllers\Rest\LkeIndikatorFormulaController;
 use App\Http\Controllers\Rest\LkeIndikatorNilaiController;
 use App\Http\Controllers\Rest\PredikatController;
 use Illuminate\Support\Facades\Route;
@@ -54,5 +55,16 @@ Route::prefix('lke-indikator-nilai')->group(function () {
         Route::post('/', 'store');
         
         Route::delete('/{id}', 'destroy'); 
+    });
+});
+
+Route::prefix('lke-indikator-formula')->group(function () {
+    Route::controller(LkeIndikatorFormulaController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+    
+        Route::post('/', 'store');
+        
+        Route::delete('/{id}', 'destroy');        
     });
 });

@@ -7,7 +7,6 @@ $(document).ready(function () {
     });
 
     const _rest_indikator = URL_REST + '/lke-indikator'
-    const _rest_formula = URL_REST + '/lke-formula'
 
     let _w_sett_lke = $('#w_sett_lke');
     let _c_lke_id = $('#c_lke_id');
@@ -78,4 +77,88 @@ $(document).ready(function () {
             $('#dgIndikator').treegrid('fixRowHeight');
         }
     });
+
+    $('#f_indikator_id').combotree({
+        onChange: function (newValue, oldValue) {
+            if (newValue) {
+                loadDataNilaiMinimal({
+                    lke_indikator_id: newValue,
+                })
+
+                loadDataIndikatorFormula({
+                    lke_indikator_id: newValue,
+                });
+            } else {
+                Alert('warning', 'Pilih indikator')                
+            }
+        }
+    });
+
+    var loadDataNilaiMinimal = (params) => {
+        $('#dgNilaiMinimal').datagrid({
+            method: 'get',
+            url: URL_REST + '/lke-indikator-nilai',
+            queryParams: params,
+            loader: function (param, success, error) {
+                let {method, url} = $(this).datagrid('options')
+
+                if (method==null || url==null) return false
+
+                $.ajax({
+                    method: method,
+                    url: url,
+                    data: param,
+                    dataType: 'json',
+                    success: function (res) {
+                        success(res)
+                    },
+                    error: function (xhr, status) {
+                        error(xhr)
+                    }
+                })
+            },
+            onLoadError: function (objs) {
+                let {statusText, responseJSON} = objs
+
+                Alert('error', responseJSON, statusText)
+            },
+        });
+
+        $('#dgNilaiMinimal').datagrid('fixColumnSize');
+        $('#dgNilaiMinimal').datagrid('fixRowHeight');
+    }
+
+    var loadDataIndikatorFormula = (params) => {
+        $('#dgIndikatorFormula').datagrid({
+            method: 'get',
+            url: URL_REST + '/lke-indikator-formula',
+            queryParams: params,
+            loader: function (param, success, error) {
+                let {method, url} = $(this).datagrid('options')
+                
+                if (method==null || url==null) return false
+
+                $.ajax({
+                    method: method,
+                    url: url,
+                    data: param,
+                    dataType: 'json',
+                    success: function (res) {
+                        success(res)
+                    },
+                    error: function (xhr, status) {
+                        error(xhr)
+                    }
+                })
+            },
+            onLoadError: function (objs) {
+                let {statusText, responseJSON} = objs
+
+                Alert('error', responseJSON, statusText)
+            },
+        });
+
+        $('#dgIndikatorFormula').datagrid('fixColumnSize');
+        $('#dgIndikatorFormula').datagrid('fixRowHeight');
+    }
 });

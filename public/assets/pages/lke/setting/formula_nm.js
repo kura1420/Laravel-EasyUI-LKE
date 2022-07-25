@@ -28,18 +28,6 @@ $(document).ready(function () {
         url: URL_REST + '/lke/lists'
     });
 
-    _indikator_id.combotree({
-        onChange: function (newValue, oldValue) {
-            if (newValue) {
-                loadData({
-                    lke_indikator_id: newValue,
-                })
-            } else {
-                Alert('warning', 'Pilih indikator')                
-            }
-        }
-    });
-
     _dg.datagrid({
         fit:true,
         singleSelect:true,

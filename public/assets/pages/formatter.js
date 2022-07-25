@@ -1,67 +1,35 @@
-function billingStatus (value) {
-    let status = null;
+function rumus(value) {
+    let result = null;
 
     switch (value) {
-        case 0:
-            status = 'Unpaid'
+        case 'tambah':
+            result = 'Penjumlahan';
             break;
 
-        case 1:
-            status = 'Paid'
+        case 'kurang':
+            result = 'Pengurangan';
             break;
 
-        case 2:
-            status = 'Suspend'
+        case 'kali':
+            result = 'Perkalian';
             break;
 
-        case 3:
-            status = 'Unsuspend'
+        case 'bagi':
+            result = 'Pembagian';
             break;
 
-        case 4:
-            status = 'Terminated'
-            break;
-    
-        default:
-            status = 'No defined'
-            break;
-    }
-
-    return status
-}
-
-function customerCandidateStatus (value) {
-    let status = null;
-
-    switch (parseInt(value)) {
-        case 0:
-            status = 'Registered'
+        case 'percent':
+            result = 'Persentase';
             break;
 
-        case 1:
-            status = 'Confirmation'
-            break;
-
-        case 2:
-            status = 'Schedule Install'
-            break;
-
-        case 3:
-            status = 'On Process'
-            break;
-
-        case 4:
-            status = 'Cancel'
-            break;
-
-        case 5:
-            status = 'Success'
+        case 'samadengan':
+            result = 'Sama Dengan';
             break;
     
         default:
-            status = 'No defined'
+            result = '';
             break;
     }
 
-    return status
+    return result;
 }
