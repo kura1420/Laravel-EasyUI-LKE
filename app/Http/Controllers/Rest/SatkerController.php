@@ -75,8 +75,7 @@ class SatkerController extends Controller
 
     public function lists()
     {
-        $rows = Satker::where('active', 1)
-            ->orderBy('nama', 'asc')
+        $rows = Satker::orderBy('nama', 'asc')
             ->select('id', 'nama as text')
             ->get();
 

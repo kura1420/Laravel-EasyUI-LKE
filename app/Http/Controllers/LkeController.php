@@ -23,4 +23,9 @@ class LkeController extends Controller
     {
         return view(self::FOLDER . 'setting.main');
     }
+
+    public function pengusulan()
+    {
+        return view(self::FOLDER . 'pengusulan.main');
+    }
 }

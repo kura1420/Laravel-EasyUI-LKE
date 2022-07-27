@@ -54,9 +54,17 @@ class LkeIndikatorFormulaRequest extends FormRequest
     public function attributes()
     {
         return [
+            'f_urutan' => 'urutan',
+            'f_rumus' => 'rumus',
+            'f_lke_indikator_id_target' => 'indikator target',
+            'nilai_maksimal' => 'nilai maksimal',
+            'nilai_maksimal_mengurangi' => 'nilai maksimal mengurangi',
+            'f_tipe_penilaian' => 'tipe penilaian',
+            'f_nilai_bilangan' => 'nilai bilangan',
+            'f_nilai_bawaaan' => 'nilai bawaaan',
+            'f_keterangan' => 'keterangan',
             'lke_id' => 'lke',
-            'lke_indikator_id' => 'indikator target',
-            'lke_indikator_id_target' => 'indikator formula',
+            'lke_indikator_id' => 'indikator',
         ];
     }
 }

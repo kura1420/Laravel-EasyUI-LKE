@@ -7,6 +7,7 @@ use App\Http\Requests\LkeRequest;
 use App\Models\Lke;
 use App\Models\LkePredikat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LkeController extends Controller
 {
@@ -115,5 +116,17 @@ class LkeController extends Controller
         LkePredikat::find($id)->delete();
 
         return response()->json('OK', 200);
+    }
+
+    public function listTotalIndikator()
+    {
+        $rows = DB::select("SELECT 
+            l.id, l.nama, l.aktif, l.tahun,
+            COUNT(li.lke_id) AS total_indikator
+        FROM lkes l 
+        LEFT JOIN lke_indikators li ON l.id = li.lke_id
+        GROUP BY l.id, l.nama, l.aktif, l.tahun");
+
+        return response()->json($rows);
     }
 }

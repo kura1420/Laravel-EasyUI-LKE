@@ -8,88 +8,102 @@ $(document).ready(function () {
 
     const _rest_indikator = URL_REST + '/lke-indikator'
 
-    let _w_sett_lke = $('#w_sett_lke');
-    let _c_lke_id = $('#c_lke_id');
+    let _w = $('#w_sett_lke');
+    let _dg = $('#dgLke');
     let _btnChooseLKE = $('#btnChooseLKE');
 
-    _c_lke_id.combobox({
-        valueField:'id',
-        textField:'nama',
-        url: URL_REST + '/lke/lists'
+    _dg.datagrid({
+        singleSelect:true,
+        collapsible:true,
+        border:false,
+        fitColumns:true,
+        pagination:true,
+        rownumbers:true,
+        remoteSort:false,
+        fit:true,
+        url: URL_REST + '/lke/lists-total-indikator',
     });
 
     _btnChooseLKE.linkbutton({
         onClick: function () {
-            let value = _c_lke_id.combobox('getValue')
+            let row = _dg.datagrid('getSelected')
 
-            $('#i_lke_id').combobox('setValue', value)
-            $('#f_lke_id').combobox('setValue', value)
+            if (row) {
+                let value = row.id
 
-            _w_sett_lke.window('close')
+                $('#i_lke_id').combobox('setValue', value)
+                $('#f_lke_id').combobox('setValue', value)
 
-            $('#i_parent').combotree({
-                valueField:'id',
-                textField:'text',
-                method: 'get',
-                url: _rest_indikator + '/parent/' + value,
-            });
+                _w.window('close')
 
-            $('#f_indikator_id').combotree({
-                valueField:'id',
-                textField:'text',
-                method: 'get',
-                url: _rest_indikator + '/parent/' + value,
-            });
+                $('#i_parent').combotree({
+                    valueField:'id',
+                    textField:'text',
+                    method: 'get',
+                    url: _rest_indikator + '/parent/' + value,
+                });
 
-            $('#dgIndikator').treegrid({
-                method: 'get',
-                url: _rest_indikator,
-                queryParams: {
-                    lke_id: value
-                },
-                loader: function (param, success, error) {
-    
-                    let {method, url} = $(this).treegrid('options')
-                    
-                    if (method==null || url==null) return false
-    
-                    $.ajax({
-                        method: method,
-                        url: url,
-                        data: param,
-                        dataType: 'json',
-                        success: function (res) {
-                            success(res)
-                        },
-                        error: function (xhr, status) {
-                            error(xhr)
-                        }
-                    })
-                },
-                onLoadError: function (objs) {
-                    let {statusText, responseJSON} = objs
-    
-                    Alert('error', responseJSON, statusText)
-                },
-            });
-    
-            $('#dgIndikator').treegrid('fixColumnSize');
-            $('#dgIndikator').treegrid('fixRowHeight');
+                $('#f_indikator_id').combotree({
+                    valueField:'id',
+                    textField:'text',
+                    method: 'get',
+                    url: _rest_indikator + '/parent/' + value,
+                });
+
+                $('#dgIndikator').treegrid({
+                    method: 'get',
+                    url: _rest_indikator,
+                    queryParams: {
+                        lke_id: value
+                    },
+                    loader: function (param, success, error) {
+        
+                        let {method, url} = $(this).treegrid('options')
+                        
+                        if (method==null || url==null) return false
+        
+                        $.ajax({
+                            method: method,
+                            url: url,
+                            data: param,
+                            dataType: 'json',
+                            success: function (res) {
+                                success(res)
+                            },
+                            error: function (xhr, status) {
+                                error(xhr)
+                            }
+                        })
+                    },
+                    onLoadError: function (objs) {
+                        let {statusText, responseJSON} = objs
+        
+                        Alert('error', responseJSON, statusText)
+                    },
+                });
+        
+                $('#dgIndikator').treegrid('fixColumnSize');
+                $('#dgIndikator').treegrid('fixRowHeight');
+            } else {
+                Alert('warning', 'Silahkan Pilih LKE')
+            }
         }
     });
 
     $('#f_indikator_id').combotree({
         onChange: function (newValue, oldValue) {
             if (newValue) {
-                loadDataNilaiMinimal({
+                let params = {
                     lke_indikator_id: newValue,
-                })
+                };
 
-                loadDataIndikatorFormula({
-                    lke_indikator_id: newValue,
-                });
+                loadDataNilaiMinimal(params)
+
+                loadDataIndikatorFormula(params);
+
+                loadDataJawaban(params);
             } else {
-                Alert('warning', 'Pilih indikator')                
+                Alert('warning', 'Silahkan Pilih indikator')                
             }
         }
     });
@@ -160,5 +174,39 @@ $(document).ready(function () {
 
         $('#dgIndikatorFormula').datagrid('fixColumnSize');
         $('#dgIndikatorFormula').datagrid('fixRowHeight');
+    }
+
+    var loadDataJawaban = (params) => {
+        $('#dgJawaban').datagrid({
+            method: 'get',
+            url: URL_REST + '/lke-indikator-jawaban',
+            queryParams: params,
+            loader: function (param, success, error) {
+                let {method, url} = $(this).datagrid('options')
+                
+                if (method==null || url==null) return false
+
+                $.ajax({
+                    method: method,
+                    url: url,
+                    data: param,
+                    dataType: 'json',
+                    success: function (res) {
+                        success(res)
+                    },
+                    error: function (xhr, status) {
+                        error(xhr)
+                    }
+                })
+            },
+            onLoadError: function (objs) {
+                let {statusText, responseJSON} = objs
+
+                Alert('error', responseJSON, statusText)
+            },
+        });
+
+        $('#dgJawaban').datagrid('fixColumnSize');
+        $('#dgJawaban').datagrid('fixRowHeight');
     }
 });

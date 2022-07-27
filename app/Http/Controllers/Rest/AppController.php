@@ -49,6 +49,12 @@ class AppController extends Controller
                         'title' => 'Setting',
                         'url' => 'lke-setting',
                     ],
+                    [
+                        'id' => uniqid(),
+                        'text' => 'Pengusulan',
+                        'title' => 'Pengusulan',
+                        'url' => 'pengusulan',
+                    ],
                 ],
             ],
             [

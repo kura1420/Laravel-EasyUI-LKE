@@ -3,7 +3,9 @@
 use App\Http\Controllers\Rest\LkeController;
 use App\Http\Controllers\Rest\LkeIndikatorController;
 use App\Http\Controllers\Rest\LkeIndikatorFormulaController;
+use App\Http\Controllers\Rest\LkeIndikatorJawabanController;
 use App\Http\Controllers\Rest\LkeIndikatorNilaiController;
+use App\Http\Controllers\Rest\LkePengusulanSatkerController;
 use App\Http\Controllers\Rest\PredikatController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +30,7 @@ Route::prefix('lke')->group(function () {
     
         Route::post('/', 'store');
         Route::post('/lists', 'lists');
+        Route::post('/lists-total-indikator', 'listTotalIndikator');
         
         Route::delete('/{id}', 'destroy'); 
         Route::delete('/predikat/{id}', 'predikatDestroy');
@@ -66,5 +69,27 @@ Route::prefix('lke-indikator-formula')->group(function () {
         Route::post('/', 'store');
         
         Route::delete('/{id}', 'destroy');        
+    });
+});
+
+Route::prefix('lke-indikator-jawaban')->group(function () {
+    Route::controller(LkeIndikatorJawabanController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+    
+        Route::post('/', 'store');
+        
+        Route::delete('/{id}', 'destroy');
+    });
+});
+
+Route::prefix('lke-pengusulan')->group(function () {
+    Route::controller(LkePengusulanSatkerController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+    
+        Route::post('/', 'store');
+        
+        Route::delete('/{id}', 'destroy');
     });
 });

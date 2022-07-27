@@ -186,10 +186,39 @@ $(document).ready(function () {
                 $.get(_rest + "/" + row.id,
                     function (data, textStatus, jqXHR) {
                         delete data.id
+                        
+                        let {
+                            urutan,
+                            rumus,
+                            lke_indikator_id_target,
+                            nilai_maksimal,
+                            nilai_maksimal_mengurangi,
+                            tipe_penilaian,
+                            nilai_bilangan,
+                            nilai_bawaaan,
+                            keterangan
+                        } = data
     
                         _w.window('open');
-    
-                        _ff.form('load', data)
+                        
+                        _lke_indikator_id_target.combotree({
+                            valueField:'id',
+                            textField:'text',
+                            method: 'get',
+                            url: URL_REST + '/lke-indikator/parent/' + $('#f_lke_id').combobox('getValue'),
+                        });
+
+                        _ff.form('load', {
+                            f_urutan: urutan,
+                            f_rumus: rumus,
+                            f_lke_indikator_id_target: lke_indikator_id_target,
+                            f_nilai_maksimal: nilai_maksimal,
+                            f_nilai_maksimal_mengurangi: nilai_maksimal_mengurangi,
+                            f_tipe_penilaian: tipe_penilaian,
+                            f_nilai_bilangan: nilai_bilangan,
+                            f_nilai_bawaaan: nilai_bawaaan,
+                            f_keterangan: keterangan,
+                        });
                     },
                     "json"
                 );
