@@ -28,4 +28,9 @@ class LkeController extends Controller
     {
         return view(self::FOLDER . 'pengusulan.main');
     }
+
+    public function pengisian()
+    {
+        return view(self::FOLDER . 'pengisian.main');
+    }
 }

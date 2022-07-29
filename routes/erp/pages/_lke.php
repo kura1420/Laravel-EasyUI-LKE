@@ -8,4 +8,5 @@ Route::controller(LkeController::class)->group(function () {
     Route::get('/predikat', 'predikat');
     Route::get('/lke-setting', 'setting');
     Route::get('/pengusulan', 'pengusulan');
+    Route::get('/pengisian', 'pengisian');
 });

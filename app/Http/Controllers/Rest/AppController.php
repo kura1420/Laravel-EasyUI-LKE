@@ -55,6 +55,12 @@ class AppController extends Controller
                         'title' => 'Pengusulan',
                         'url' => 'pengusulan',
                     ],
+                    [
+                        'id' => uniqid(),
+                        'text' => 'Pengisian',
+                        'title' => 'Pengisian',
+                        'url' => 'pengisian',
+                    ],
                 ],
             ],
             [

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LkePengusulanSatkerRequest;
 use App\Models\LkePengusulanSatker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LkePengusulanSatkerController extends Controller
 {
@@ -18,16 +19,29 @@ class LkePengusulanSatkerController extends Controller
         $sortName = $request->sortName ?? NULL;
         $search = $request->search ?? NULL;
 
-        $table = LkePengusulanSatker::select('*');
+        $table = LkePengusulanSatker::with(['predikats', 'satkers'])
+            ->select('*');
 
         if ($sortName) {
             $result = $table->orderBy($sortName, $sortOrder)->paginate($rows);
         } elseif ($search) {
             $result = $table->where('nama', 'like', "%{$search}%")
                 ->orWhere('usulan', 'like', "%{$search}%")
-                ->paginate($rows);
+                ->paginate($rows)
+                ->map(function ($row) {
+                    $row->satker_nama = $row->satkers->nama;
+                    $row->predikat_nama = $row->predikats->nama;
+
+                    return $row;
+                });
         } else {
-            $result = $table->paginate($rows);
+            $result = $table->paginate($rows)
+                ->map(function ($row) {
+                    $row->satker_nama = $row->satkers->nama;
+                    $row->predikat_nama = $row->predikats->nama;
+
+                    return $row;
+                });
         }
         
         return response()->json($result, 200);
@@ -64,5 +78,32 @@ class LkePengusulanSatkerController extends Controller
         LkePengusulanSatker::find($id)->delete();
 
         return response()->json('OK', 200);
+    }
+
+    public function listPengisianLke(Request $request, $lke_id)
+    {
+        $search = $request->search ?? NULL;
+
+        $whereStmt = " AND lps.lke_id = '$lke_id'";
+
+        if ($search) {
+            $whereStmt .= " AND (l.nama LIKE '%$search%' OR s.kode LIKE '%$search%' OR s.nama LIKE '%$search%')";
+        }
+
+        $sql = "SELECT
+            lps.id,
+            l.nama AS lke_nama,
+            s.kode AS satker_kode, s.nama AS satker_nama,
+            COUNT(li.id) AS total_indikator
+        FROM lke_pengusulan_satkers lps
+        INNER JOIN lkes l ON lps.lke_id = l.id
+        INNER JOIN satkers s ON lps.satker_id = s.id
+        INNER JOIN lke_indikators li ON lps.lke_id = li.lke_id
+        WHERE lps.aktif = 1 $whereStmt
+        GROUP BY lps.id, l.nama, s.nama";
+
+        $rows = DB::select($sql);
+
+        return response()->json($rows);
     }
 }

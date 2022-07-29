@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class LkePengusulanSatkerRequest extends FormRequest
 {
@@ -32,9 +33,16 @@ class LkePengusulanSatkerRequest extends FormRequest
         return [
             //
             'aktif' => 'required',
-            'satker_id' => 'required|string|unique:lke_pengusulan_satkers',
             'lke_id' => 'required|string',
             'predikat_id' => 'required|string',
+            'satker_id' => [
+                'required',
+                'string',
+                Rule::unique('lke_pengusulan_satkers')->where(function($query) use ($lke_id, $predikat_id) {
+                    return $query->where('lke_id', $lke_id)
+                        ->where('predikat_id', $predikat_id);
+                }),
+            ],
         ];
     }
 

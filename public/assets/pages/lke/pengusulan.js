@@ -239,12 +239,7 @@ $(document).ready(function () {
                     },
                     dataType: 'json',
                     success: function (res) {
-                        let {total, data} = res
-
-                        success({
-                            total: total,
-                            rows: data
-                        })
+                        success(res);
                     },
                     error: function (xhr, status) {
                         error(xhr)
