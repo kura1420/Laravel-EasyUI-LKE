@@ -29,17 +29,17 @@ class LkeIndikatorRequest extends FormRequest
 
         return [
             //
-            'urutan' => 'required|string|max:30',
+            'i_urutan' => 'required|string|max:30',
             'urutan_tampilkan' => 'required',
-            'kode' => 'required|string|max:50',
-            'alias' => 'required|string|max:255',
-            'indikator' => 'required|string',
-            'penjelasan' => 'required|string',
+            'i_kode' => 'required|string|max:50',
+            'i_alias' => 'required|string|max:255',
+            'i_indikator' => 'required|string',
+            'i_penjelasan' => 'required|string',
             'aktif' => 'required',
-            'nilai' => 'nullable|numeric',
-            'parent' => 'nullable|string|max:36',
-            'tipe_jawaban' => 'nullable|string|max:30',
-            'lke_id' => 'required|string',
+            'i_nilai' => 'nullable|numeric',
+            'i_parent' => 'nullable|string|max:36',
+            'i_tipe_jawaban' => 'nullable|string|max:30',
+            'i_lke_id' => 'required|string',
         ];
     }
 

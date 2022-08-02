@@ -16,6 +16,7 @@ class LkeIndikatorFormulaController extends Controller
 
         $result = LkeIndikatorFormula::with(['lke_indikator_targets'])
             ->where('lke_indikator_id', $lke_indikator_id)
+            ->orderBy('urutan', 'asc')
             ->get()
             ->map(function ($row) {
                 if ($row->lke_indikator_targets) {

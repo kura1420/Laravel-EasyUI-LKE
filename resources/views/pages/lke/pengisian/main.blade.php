@@ -17,13 +17,13 @@
             <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'"></a>
         </span> -->
         
-        <span class="easyui-tooltip" title="Save">
+        <!-- <span class="easyui-tooltip" title="Save">
             <a id="btnSave" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save',disabled:true"></a>
-        </span>
+        </span> -->
         
-        <span class="easyui-tooltip" title="Edit">
+        <!-- <span class="easyui-tooltip" title="Edit">
             <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'"></a>
-        </span>
+        </span> -->
         
         <!-- <span class="easyui-tooltip" title="Duplicate">
             <a id="btnCopy" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-copy'"></a>

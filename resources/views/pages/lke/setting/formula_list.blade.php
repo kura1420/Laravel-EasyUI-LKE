@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div title="Jawaban">
+        <div title="Pilihan Jawaban">
             <table id="dgJawaban" class="easyui-datagrid">
                 <thead>
                     <tr>

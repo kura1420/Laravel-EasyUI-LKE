@@ -52,17 +52,17 @@ class LkeIndikatorController extends Controller
                 'id' => $request->id,
             ],
             [
-                'urutan' => $request->urutan,
+                'urutan' => $request->i_urutan,
                 'urutan_tampilkan' => $request->urutan_tampilkan == 'true' ? 1 : 0,
-                'kode' => $request->kode,
-                'alias' => $request->alias,
-                'indikator' => $request->indikator,
-                'penjelasan' => $request->penjelasan,
+                'kode' => $request->i_kode,
+                'alias' => $request->i_alias,
+                'indikator' => $request->i_indikator,
+                'penjelasan' => $request->i_penjelasan,
                 'aktif' => $request->aktif == 'true' ? 1 : 0,
-                'nilai' => $request->nilai,
-                'parent' => $request->parent,
-                'tipe_jawaban' => $request->tipe_jawaban,
-                'lke_id' => $request->lke_id,
+                'nilai' => $request->i_nilai,
+                'parent' => $request->i_parent,
+                'tipe_jawaban' => $request->i_tipe_jawaban,
+                'lke_id' => $request->i_lke_id,
             ]
         );
 

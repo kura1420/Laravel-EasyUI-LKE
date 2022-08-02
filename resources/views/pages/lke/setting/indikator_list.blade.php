@@ -4,7 +4,17 @@
             <tr>
                 <th data-options="field:'urutan'," sortable="true">Urutan</th>
                 <th data-options="field:'kode'," sortable="true">Kode</th>
+                <!-- <th data-options="field:'alias'," sortable="true">Alias</th> -->
                 <th data-options="field:'indikator'," sortable="true">Indikator</th>
+                <th data-options="
+                    field:'tipe_jawaban',
+                    formatter: function (value, row, index) {
+                        if (value) {
+                            return ucfirst(value);
+                        }
+                    },
+                    align:'center',
+                " sortable="true">Tipe Jawaban</th>
                 <th data-options="field:'nilai',align:'center'," sortable="true">Nilai Bobot</th>
                 <!-- <th data-options="
                     field:'aktif',

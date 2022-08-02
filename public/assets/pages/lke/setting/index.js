@@ -24,6 +24,21 @@ $(document).ready(function () {
         url: URL_REST + '/lke/lists-total-indikator',
     });
 
+    $('#f_tipe_jawaban').combobox({
+        valueField:'id',
+        textField:'text',
+        data: [
+            {
+                id: 'angka',
+                text: 'Angka'
+            },
+            {
+                id: 'pilihan',
+                text: 'Pilihan',
+            },
+        ],
+    });
+
     _btnChooseLKE.linkbutton({
         onClick: function () {
             let row = _dg.datagrid('getSelected')
@@ -93,6 +108,12 @@ $(document).ready(function () {
     $('#f_indikator_id').combotree({
         onChange: function (newValue, oldValue) {
             if (newValue) {
+                var t = $('#f_indikator_id').combotree('tree');
+                var n = t.tree('getSelected');	
+                
+                $('#f_tipe_jawaban').combobox('setValue', n.tipe_jawaban);
+                $('#f_nilai').numberbox('setValue', n.nilai);
+                
                 let params = {
                     lke_indikator_id: newValue,
                 };

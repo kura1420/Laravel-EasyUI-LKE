@@ -15,6 +15,7 @@ class LkeIndikatorJawabanController extends Controller
         $lke_indikator_id = $request->lke_indikator_id ?? NULL;
 
         $result = LkeIndikatorJawaban::where('lke_indikator_id', $lke_indikator_id)
+            ->orderBy('urutan', 'asc')
             ->get();
         
         return response()->json($result, 200);

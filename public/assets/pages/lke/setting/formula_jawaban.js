@@ -41,14 +41,19 @@ $(document).ready(function () {
     _btnAdd.linkbutton({
         onClick: function() {
             let indikator_id = $('#f_indikator_id').combotree('getValue');
+            let tipe_jawaban = $('#f_tipe_jawaban').combobox('getValue');
             
-            if (!indikator_id) {
-                Alert('warning', 'Silahkan pilih indikator target terlebih dahulu')                
+            if (tipe_jawaban === 'pilihan') {
+                if (!indikator_id) {
+                    Alert('warning', 'Silahkan pilih indikator target terlebih dahulu');
+                } else {
+                    _w.window('open');
+        
+                    _ff.form('clear');
+                }
             } else {
-                _w.window('open');
-    
-                _ff.form('clear');
-            }
+                Alert('warning', 'Tipe jawaban bukan pilihan');                
+            }            
         }
     });
 
@@ -108,14 +113,19 @@ $(document).ready(function () {
     
     _btnEdit.linkbutton({
         onClick: function() {
-            let row = _dg.datagrid('getSelected')
+            let row = _dg.datagrid('getSelected');
 
             let indikator_id = $('#f_indikator_id').combotree('getValue');
-            
-            if (!indikator_id) {
-                Alert('warning', 'Silahkan pilih indikator target terlebih dahulu')                
-            } else {      
-                getData(row)
+            let tipe_jawaban = $('#f_tipe_jawaban').combobox('getValue');
+
+            if (tipe_jawaban === 'pilihan') {            
+                if (!indikator_id) {
+                    Alert('warning', 'Silahkan pilih indikator target terlebih dahulu');
+                } else {      
+                    getData(row)
+                }                
+            } else {
+                Alert('warning', 'Tipe jawaban bukan pilihan');                 
             }
         }
     });

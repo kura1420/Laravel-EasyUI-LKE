@@ -84,12 +84,18 @@ $(document).ready(function () {
 
     _btnAdd.linkbutton({
         onClick: function () {
-            if (rowIndex == undefined) {
-                prepareEditing()
+            let indikator_id = $('#f_indikator_id').combotree('getValue');
+
+            if (!indikator_id) {
+                Alert('warning', 'Silahkan pilih indikator target terlebih dahulu');             
             } else {
-                setTimeout(function(){
-                    _dg.datagrid('selectRow', rowIndex);
-                },0);                
+                if (rowIndex == undefined) {
+                    prepareEditing()
+                } else {
+                    setTimeout(function(){
+                        _dg.datagrid('selectRow', rowIndex);
+                    },0);                
+                }                
             }
         }
     });
@@ -152,7 +158,13 @@ $(document).ready(function () {
 
     _btnEdit.linkbutton({
         onClick: function () {
-            editRow()
+            let indikator_id = $('#f_indikator_id').combotree('getValue');
+
+            if (!indikator_id) {
+                Alert('warning', 'Silahkan pilih indikator target terlebih dahulu');                
+            } else {
+                editRow()                
+            }
         }
     });
 

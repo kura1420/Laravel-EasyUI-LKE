@@ -8,6 +8,8 @@ $(document).ready(function () {
 
     const _rest = URL_REST + '/lke-indikator'
 
+    var params = {};
+
     let _dg = $('#dgIndikator');
     let _ff = $('#ffIndikator');
     let _ss = $('#ssIndikator');
